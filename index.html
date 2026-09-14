@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MovilPy — Sillas de ruedas con entrega a domicilio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1B3A4B;
+    --navy-deep: #122733;
+    --teal: #2F6F6F;
+    --sand: #F5EFE4;
+    --sand-deep: #EAE1CF;
+    --amber: #E8A33D;
+    --whatsapp: #2FA24B;
+    --ink: #1E2A2E;
+    --ink-soft: #52605F;
+    --white: #FFFFFF;
+    --radius: 14px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: 'Public Sans', sans-serif;
+    color: var(--ink);
+    background: var(--sand);
+    font-size: 17px;
+    line-height: 1.55;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Fraunces', serif;
+    color: var(--navy-deep);
+    margin: 0;
+    line-height: 1.15;
+  }
+
+  a { color: inherit; }
+
+  img, svg { display: block; max-width: 100%; }
+
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- Header ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(245, 239, 228, 0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--sand-deep);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    color: var(--navy-deep);
+  }
+
+  .brand-mark {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--ink-soft);
+  }
+
+  .nav-links a:hover { color: var(--navy); }
+
+  .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--whatsapp);
+    color: var(--white);
+    text-decoration: none;
+    padding: 11px 20px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .btn-whatsapp:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(47,162,75,0.35); }
+
+  .btn-whatsapp svg { width: 18px; height: 18px; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 72px 0 56px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .eyebrow-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--teal);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+  }
+
+  .eyebrow-line::before {
+    content: "";
+    width: 26px;
+    height: 2px;
+    background: var(--amber);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.2rem, 4vw, 3.1rem);
+    font-weight: 600;
+    max-width: 15ch;
+  }
+
+  .hero p.lead {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+  }
+
+  .hero-actions {
+    margin-top: 32px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    padding: 11px 22px;
+    border-radius: 999px;
+    border: 1.5px solid var(--navy);
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .trust-row {
+    margin-top: 40px;
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  .trust-item svg { width: 20px; height: 20px; color: var(--teal); flex-shrink: 0; }
+
+  .hero-art {
+    background: linear-gradient(160deg, var(--navy) 0%, var(--teal) 100%);
+    border-radius: 24px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4/3.4;
+  }
+
+  .hero-art svg { width: 100%; height: 100%; }
+
+  /* ---------- Section headings ---------- */
+  .section-head {
+    max-width: 60ch;
+    margin: 0 0 40px;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.7rem, 3vw, 2.2rem);
+    font-weight: 600;
+  }
+
+  .section-head p {
+    margin-top: 12px;
+    color: var(--ink-soft);
+    font-size: 1.02rem;
+  }
+
+  section { padding: 64px 0; }
+
+  section.alt { background: var(--white); }
+
+  /* ---------- Product grid ---------- */
+  .filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+
+  .filter-chip {
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: var(--sand-deep);
+    color: var(--ink-soft);
+    font-size: 0.88rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .filter-chip.active,
+  .filter-chip:hover {
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+  }
+
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--sand-deep);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-art {
+    background: var(--sand);
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4/3;
+  }
+
+  .card-art svg { width: 78%; }
+
+  .card-body {
+    padding: 22px 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+
+  .card-tag {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .card h3 { font-size: 1.2rem; font-weight: 600; }
+
+  .card p.desc {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    flex: 1;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+
+  .price {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--navy-deep);
+  }
+
+  .price small {
+    font-family: 'Public Sans', sans-serif;
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    font-weight: 500;
+    display: block;
+  }
+
+  .btn-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--navy);
+    color: var(--white);
+    text-decoration: none;
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .btn-card svg { width: 15px; height: 15px; }
+
+  /* ---------- Steps ---------- */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  .step {
+    position: relative;
+    padding: 30px 26px;
+    background: var(--sand);
+    border-radius: var(--radius);
+  }
+
+  .step-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+
+  .step-icon svg { width: 24px; height: 24px; color: var(--white); }
+
+  .step h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; }
+
+  .step p { color: var(--ink-soft); font-size: 0.93rem; margin: 0; }
+
+  /* ---------- CTA band ---------- */
+  .cta-band {
+    background: var(--navy-deep);
+    color: var(--white);
+    border-radius: 24px;
+    padding: 52px 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  .cta-band h2 { color: var(--white); font-size: 1.7rem; font-weight: 600; max-width: 22ch; }
+  .cta-band p { color: #C9D3D6; margin-top: 8px; max-width: 40ch; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 44px 0 34px;
+    border-top: 1px solid var(--sand-deep);
+  }
+
+  .foot-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .foot-brand {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--navy-deep);
+  }
+
+  .foot-note {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    margin-top: 8px;
+    max-width: 42ch;
+  }
+
+  .foot-contact {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    text-align: right;
+  }
+
+  .foot-contact a { color: var(--navy); font-weight: 600; text-decoration: none; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; padding-top: 44px; }
+    .hero-art { order: -1; aspect-ratio: 16/10; }
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .steps { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .cta-band { flex-direction: column; align-items: flex-start; }
+    .foot-row { flex-direction: column; }
+    .foot-contact { text-align: left; }
+  }
+
+  @media (max-width: 560px) {
+    .grid { grid-template-columns: 1fr; }
+    .hero { padding: 32px 0 40px; }
+    section { padding: 48px 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+
+  a:focus-visible, button:focus-visible {
+    outline: 3px solid var(--amber);
+    outline-offset: 2px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="20" fill="#1B3A4B"/>
+        <circle cx="16" cy="26" r="7" stroke="#E8A33D" stroke-width="2.4" fill="none"/>
+        <path d="M16 12v14h9l4 6" stroke="#F5EFE4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M16 19h6" stroke="#F5EFE4" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      MovilPy
+    </div>
+    <nav class="nav-links">
+      <a href="#productos">Productos</a>
+      <a href="#como-comprar">Cómo comprar</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <a class="btn-whatsapp" href="https://wa.me/595981457880?text=Hola%2C%20quiero%20consultar%20sobre%20sus%20sillas%20de%20ruedas" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2Zm5.8 14.13c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.11.11-1.79-.11-.41-.13-.94-.3-1.62-.6-2.84-1.23-4.69-4.1-4.83-4.29-.14-.19-1.15-1.53-1.15-2.92s.72-2.07.98-2.35c.24-.27.53-.34.71-.34h.51c.16 0 .38-.06.6.45.24.56.79 1.94.86 2.08.07.14.11.3.02.49-.09.19-.14.3-.27.46-.14.16-.29.36-.41.48-.14.14-.28.29-.12.57.16.28.72 1.19 1.55 1.93 1.06.95 1.96 1.24 2.24 1.38.28.14.44.12.6-.07.16-.19.68-.79.87-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.26.13.44.19.5.3.06.11.06.63-.18 1.3Z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap" style="display:grid; grid-template-columns: 1.1fr 0.9fr; gap:48px; align-items:center;">
+    <div>
+      <div class="eyebrow-line">Sillas de ruedas en Paraguay</div>
+      <h1>Movilidad y libertad, entregadas hasta tu puerta</h1>
+      <p class="lead">Elegí el modelo que mejor se adapte a tu día a día. Coordinamos todo por WhatsApp y la entrega llega directo a tu domicilio, sin vueltas.</p>
+      <div class="hero-actions">
+        <a class="btn-whatsapp" href="#productos" style="background:var(--navy);">Ver sillas disponibles</a>
+        <a class="btn-outline" href="https://wa.me/595981457880?text=Hola%2C%20quiero%20consultar%20sobre%20sus%20sillas%20de%20ruedas" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      </div>
+      <div class="trust-row">
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12l5 5L20 6"/></svg>
+          Entrega a domicilio
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 4v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V7l7-4Z"/></svg>
+          Garantía en cada silla
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.34 8.5H12a8.35 8.35 0 0 1-4-1L3 20l1-4a8.4 8.4 0 0 1-1-4.13A8.38 8.38 0 0 1 11.5 3h.5a8.4 8.4 0 0 1 9 8v.5Z"/></svg>
+          Atención personalizada
+        </div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 220 200" fill="none">
+        <circle cx="70" cy="140" r="42" stroke="#F5EFE4" stroke-width="6"/>
+        <circle cx="70" cy="140" r="8" fill="#E8A33D"/>
+        <path d="M70 98v42h50l22 34" stroke="#F5EFE4" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M70 118h34" stroke="#F5EFE4" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="150" cy="150" r="14" stroke="#F5EFE4" stroke-width="5"/>
+        <path d="M92 98c0-14 8-24 8-24" stroke="#F5EFE4" stroke-width="6" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="productos" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Nuestras sillas de ruedas</h2>
+      <p>Todos los modelos incluyen asesoramiento gratuito para elegir el que mejor se adapte a tu movilidad y espacio.</p>
+    </div>
+
+    <div class="filters">
+      <button class="filter-chip active">Todas</button>
+      <button class="filter-chip">Plegables</button>
+      <button class="filter-chip">Livianas</button>
+      <button class="filter-chip">Eléctricas</button>
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+        <div class="card-art">
+          <svg viewBox="0 0 160 140" fill="none">
+            <circle cx="55" cy="100" r="32" stroke="#1B3A4B" stroke-width="5"/>
+            <circle cx="55" cy="100" r="5" fill="#E8A33D"/>
+            <path d="M55 66v34h38l16 24" stroke="#1B3A4B" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M55 82h26" stroke="#1B3A4B" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="117" cy="108" r="11" stroke="#1B3A4B" stroke-width="4"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Plegable</span>
+          <h3>Silla estándar plegable</h3>
+          <p class="desc">Ideal para uso diario, fácil de guardar en el auto y de transportar entre ambientes.</p>
+          <div class="card-footer">
+            <div class="price">Gs. 850.000<small>Precio referencial</small></div>
+            <a class="btn-card" href="https://wa.me/595981457880?text=Hola%2C%20quiero%20consultar%20sobre%20la%20silla%20est%C3%A1ndar%20plegable" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2Z"/></svg>
+              Consultar
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-art">
+          <svg viewBox="0 0 160 140" fill="none">
+            <circle cx="55" cy="100" r="30" stroke="#2F6F6F" stroke-width="4"/>
+            <circle cx="55" cy="100" r="4" fill="#E8A33D"/>
+            <path d="M55 68v32h36l15 22" stroke="#2F6F6F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M55 84h24" stroke="#2F6F6F" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="114" cy="106" r="10" stroke="#2F6F6F" stroke-width="3.5"/>
+            <path d="M30 70l10-10" stroke="#E8A33D" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Liviana</span>
+          <h3>Silla liviana de aluminio</h3>
+          <p class="desc">Estructura ultraliviana, pensada para quienes buscan mayor autonomía al trasladarse.</p>
+          <div class="card-footer">
+            <div class="price">Gs. 1.150.000<small>Precio referencial</small></div>
+            <a class="btn-card" href="https://wa.me/595981457880?text=Hola%2C%20quiero%20consultar%20sobre%20la%20silla%20liviana%20de%20aluminio" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2Z"/></svg>
+              Consultar
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-art">
+          <svg viewBox="0 0 160 140" fill="none">
+            <circle cx="55" cy="100" r="32" stroke="#1B3A4B" stroke-width="5"/>
+            <circle cx="55" cy="100" r="5" fill="#E8A33D"/>
+            <path d="M55 66v34h38l16 24" stroke="#1B3A4B" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M55 82h26" stroke="#1B3A4B" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="117" cy="108" r="11" stroke="#1B3A4B" stroke-width="4"/>
+            <rect x="30" y="60" width="14" height="8" rx="2" fill="#E8A33D"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Reclinable</span>
+          <h3>Silla reclinable con reposapiés</h3>
+          <p class="desc">Respaldo ajustable y reposapiés elevable, pensada para mayor confort en jornadas largas.</p>
+          <div class="card-footer">
+            <div class="price">Gs. 1.380.000<small>Precio referencial</small></div>
+            <a class="btn-card" href="https://wa.me/595981457880?text=Hola%2C%20quiero%20consultar%20sobre%20la%20silla%20reclinable" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2Z"/></svg>
+              Consultar
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-art">
+          <svg viewBox="0 0 160 140" fill="none">
+            <circle cx="55" cy="100" r="30" stroke="#2F6F6F" stroke-width="4"/>
+            <circle cx="55" cy="100" r="4" fill="#E8A33D"/>
+            <path d="M55 68v32h36l15 22" stroke="#2F6F6F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M55 84h24" stroke="#2F6F6F" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="114" cy="106" r="10" stroke="#2F6F6F" stroke-width="3.5"/>
+            <rect x="88" y="60" width="20" height="12" rx="3" fill="#E8A33D"/>
+            <path d="M92 66h12" stroke="#1B3A4B" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Eléctrica</span>
+          <h3>Silla eléctrica motorizada</h3>
+          <p class="desc">Control por joystick y batería de larga duración, para desplazarte sin esfuerzo.</p>
+          <div class="card-footer">
+            <div class="price">Gs. 4.200.000<small>Precio referencial</small></div>
+            <a class="btn-card" href="https://wa.me/595981457880?text=Hola%2C%20quiero%20consultar%20sobre%20la%20silla%20el%C3%A9ctrica" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2Z"/></svg>
+              Consultar
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-art">
+          <svg viewBox="0 0 160 140" fill="none">
+            <circle cx="55" cy="100" r="32" stroke="#1B3A4B" stroke-width="5"/>
+            <circle cx="55" cy="100" r="5" fill="#E8A33D"/>
+            <path d="M55 66v34h38l16 24" stroke="#1B3A4B" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M55 82h26" stroke="#1B3A4B" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="117" cy="108" r="14" stroke="#1B3A4B" stroke-width="5"/>
+            <circle cx="117" cy="108" r="4" fill="#E8A33D"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Todo terreno</span>
+          <h3>Silla todo terreno</h3>
+          <p class="desc">Ruedas reforzadas para superficies irregulares, ideal para exteriores y jardines.</p>
+          <div class="card-footer">
+            <div class="price">Gs. 1.950.000<small>Precio referencial</small></div>
+            <a class="btn-card" href="https://wa.me/595981457880?text=Hola%2C%20quiero%20consultar%20sobre%20la%20silla%20todo%20terreno" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2Z"/></svg>
+              Consultar
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-art">
+          <svg viewBox="0 0 160 140" fill="none">
+            <circle cx="55" cy="100" r="24" stroke="#2F6F6F" stroke-width="4"/>
+            <circle cx="55" cy="100" r="4" fill="#E8A33D"/>
+            <path d="M55 74v26h30l12 18" stroke="#2F6F6F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M55 86h20" stroke="#2F6F6F" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="105" cy="106" r="8" stroke="#2F6F6F" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Compacta</span>
+          <h3>Silla compacta de transporte</h3>
+          <p class="desc">Diseño angosto y desarmable, pensada para viajes y espacios reducidos.</p>
+          <div class="card-footer">
+            <div class="price">Gs. 780.000<small>Precio referencial</small></div>
+            <a class="btn-card" href="https://wa.me/595981457880?text=Hola%2C%20quiero%20consultar%20sobre%20la%20silla%20compacta" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2Z"/></svg>
+              Consultar
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="como-comprar">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Cómo comprar</h2>
+      <p>Sin formularios largos ni pasos complicados. Todo se coordina directo con una persona real.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+        </div>
+        <h3>1. Elegí tu silla</h3>
+        <p>Mirá el catálogo y elegí el modelo que más se ajuste a lo que necesitás.</p>
+      </div>
+      <div class="step">
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10Z"/></svg>
+        </div>
+        <h3>2. Escribinos por WhatsApp</h3>
+        <p>Tocá "Consultar" en el modelo elegido y confirmamos stock, color y forma de pago.</p>
+      </div>
+      <div class="step">
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h13v10H3zM16 10h3l2 3v4h-5zM7 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm11 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg>
+        </div>
+        <h3>3. Recibí en tu domicilio</h3>
+        <p>Coordinamos el envío y la silla llega directo a tu casa, lista para usar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="contacto">
+  <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <h2>¿Tenés dudas sobre qué silla elegir?</h2>
+        <p>Contanos para qué la necesitás y te recomendamos el modelo más adecuado, sin compromiso.</p>
+      </div>
+      <a class="btn-whatsapp" href="https://wa.me/595981457880?text=Hola%2C%20necesito%20ayuda%20para%20elegir%20una%20silla%20de%20ruedas" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2Z"/></svg>
+        Hablar por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <div>
+      <div class="foot-brand">MovilPy</div>
+      <p class="foot-note">Sillas de ruedas con asesoramiento y entrega a domicilio en todo Paraguay. Nombre y datos de contacto de ejemplo — reemplazalos por los tuyos.</p>
+    </div>
+    <div class="foot-contact">
+      <div><a href="https://wa.me/595981457880" target="_blank" rel="noopener">+595 981 457 880</a></div>
+      <div style="margin-top:6px;">Asunción, Paraguay</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
